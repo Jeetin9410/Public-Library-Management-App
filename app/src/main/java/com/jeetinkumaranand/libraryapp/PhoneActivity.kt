@@ -29,7 +29,7 @@ class PhoneActivity : AppCompatActivity() {
         setContentView(view)
 
          //for international type
-        phoneBinding.buttonSendSmsCode.setOnClickListener {
+        /*phoneBinding.buttonSendSmsCode.setOnClickListener {
 
             val userPhoneNumber = phoneBinding.editTextPhoneNumber.text.toString()
             val options = PhoneAuthOptions.newBuilder(auth)
@@ -40,19 +40,19 @@ class PhoneActivity : AppCompatActivity() {
                 .build()
 
             PhoneAuthProvider.verifyPhoneNumber(options)
+        }*/
+        //for indian standard
+        phoneBinding.buttonSendSmsCode.setOnClickListener {
+            val userPhoneNumber = "+91" + phoneBinding.editTextPhoneNumber.text.toString()
+            val options = PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber(userPhoneNumber)
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setActivity(this@PhoneActivity)
+                .setCallbacks(mCallbacks)
+                .build()
+
+            PhoneAuthProvider.verifyPhoneNumber(options)
         }
-//        //for indian standard
-//        phoneBinding.buttonSendSmsCode.setOnClickListener {
-//            val userPhoneNumber = "+91" + phoneBinding.editTextPhoneNumber.text.toString()
-//            val options = PhoneAuthOptions.newBuilder(auth)
-//                .setPhoneNumber(userPhoneNumber)
-//                .setTimeout(60L, TimeUnit.SECONDS)
-//                .setActivity(this@PhoneActivity)
-//                .setCallbacks(mCallbacks)
-//                .build()
-//
-//            PhoneAuthProvider.verifyPhoneNumber(options)
-//        }
 
         phoneBinding.buttonVerify.setOnClickListener {
 
